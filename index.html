@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Interaktif: Ancaman Detergen terhadap Ekosistem & Budaya Bali</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Header / Navbar Top -->
+    <header class="bg-gradient-to-r from-teal-800 via-emerald-800 to-slate-900 text-white sticky top-0 z-50 shadow-lg border-b border-teal-700/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-teal-500/20 p-2 rounded-xl border border-teal-400/30">
+                    <i data-lucide="droplets" class="w-6 h-6 text-teal-300"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight tracking-wide">EcoBali EduInteractive</h1>
+                    <p class="text-xs text-teal-200/80 hidden sm:block">Dampak Detergen pada Ekosistem, Ekonomi & Budaya Bali</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-2">
+                <button onclick="switchTab('kuis')" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold px-4 py-2 rounded-xl text-sm transition-all duration-200 shadow-md flex items-center space-x-2 border border-amber-400/50">
+                    <i data-lucide="award" class="w-4 h-4"></i>
+                    <span>Uji Pemahaman</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Sidebar Navigation (Desktop) / Top Bar (Mobile) -->
+        <nav class="lg:col-span-3 space-y-2">
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 sticky top-22">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 px-3">Modul Pembelajaran</p>
+                <div class="space-y-1" id="nav-buttons">
+                    <button onclick="switchTab('sains')" id="btn-sains" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition-all duration-200 bg-teal-50 text-teal-700 border border-teal-200">
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="flask-conical" class="w-4 h-4"></i>
+                            <span>1. Sains & Kimia</span>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="switchTab('ekologi')" id="btn-ekologi" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="waves" class="w-4 h-4"></i>
+                            <span>2. Ekologi & Lingkungan</span>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 opacity-0 group-hover:opacity-100"></i>
+                    </button>
+                    <button onclick="switchTab('pariwisata')" id="btn-pariwisata" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="palmtree" class="w-4 h-4"></i>
+                            <span>3. Pariwisata & Ekonomi</span>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 opacity-0"></i>
+                    </button>
+                    <button onclick="switchTab('budaya')" id="btn-budaya" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i>
+                            <span>4. Adat & Budaya Bali</span>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 opacity-0"></i>
+                    </button>
+                    <button onclick="switchTab('aksi')" id="btn-aksi" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="shield-check" class="w-4 h-4"></i>
+                            <span>5. Rencana Aksi Solusi</span>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 opacity-0"></i>
+                    </button>
+                </div>
+
+                <!-- Info Box Sidebar -->
+                <div class="mt-6 pt-4 border-t border-slate-100">
+                    <div class="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200/80 rounded-xl p-3.5 text-xs text-amber-900">
+                        <p class="font-bold flex items-center gap-1.5 mb-1 text-amber-950">
+                            <i data-lucide="lightbulb" class="w-4 h-4 text-amber-600"></i> Tip Belajar
+                        </p>
+                        Gunakan tombol modul atau cobalah **Simulasi Interaktif** di setiap bagian untuk memahami konsep dengan lebih mendalam!
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Panel -->
+        <main class="lg:col-span-9 space-y-6">
+
+            <!-- TAB 1: SAINS & KIMIA -->
+            <section id="tab-sains" class="tab-content space-y-6">
+                <!-- Header Card -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-teal-500/5 rounded-full blur-2xl pointer-events-none"></div>
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-teal-100 text-teal-800 mb-3">
+                        Perspektif 1: Kimia Lingkungan
+                    </span>
+                    <h2 class="text-2xl font-bold text-slate-900">Anatomi Komposisi Kimia & Biokimia Detergen</h2>
+                    <p class="text-slate-600 mt-2 text-sm leading-relaxed">
+                        Detergen sintetis dirancang untuk melepaskan kotoran secara efektif, namun struktur molekulnya membawa ancaman serius bagi biokimia ekosistem perairan alami.
+                    </p>
+                </div>
+
+                <!-- Grid Komposisi Kimia -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold mb-4">
+                            1
+                        </div>
+                        <h3 class="font-bold text-slate-900 mb-1">Surfaktan (LAS vs ABS)</h3>
+                        <p class="text-xs text-slate-500 mb-3">Surface Active Agent</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Memiliki bagian <span class="font-semibold text-blue-600">Hidrofilik</span> (suka air) & <span class="font-semibold text-amber-600">Hidrofobik</span> (suka minyak). ABS sangat sulit terurai (*non-biodegradable*). LAS lebih cepat terurai tetapi tetap beracun bagi ikan pada konsentrasi <strong>&gt; 0.1 mg/L</strong>.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold mb-4">
+                            2
+                        </div>
+                        <h3 class="font-bold text-slate-900 mb-1">Penguat Builder (STPP)</h3>
+                        <p class="text-xs text-slate-500 mb-3">Sodium Tripolyphosphate</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Berfungsi mengikat ion Kalsium ($Ca^{2+}$) dan Magnesium ($Mg^{2+}$) pada air sadah. Namun, STPP melepas nutrisi Fosfor ($P$) berlebih memicu terjadinya <strong>Eutrofikasi</strong>.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold mb-4">
+                            3
+                        </div>
+                        <h3 class="font-bold text-slate-900 mb-1">Bahan Tambahan</h3>
+                        <p class="text-xs text-slate-500 mb-3">Additives & Fragrance</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Mengandung <em>Optical Brightener</em>, pemutih berbasis klorin, dan pewangi sintetis (Phthalates). Zat-zat ini berisiko karsinogenik dan mengalami akumulasi biologis.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Interactive Lab Simulator: Algal Bloom & Eutrophication -->
+                <div class="bg-slate-900 text-white p-6 rounded-2xl shadow-xl border border-slate-800">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-teal-400">Simulasi Interaktif Lab</span>
+                            <h3 class="text-xl font-bold text-white">Mekanisme Eutrofikasi & Hypoxia</h3>
+                        </div>
+                        <div class="flex items-center space-x-2 bg-slate-800/80 p-1.5 rounded-xl border border-slate-700">
+                            <button onclick="setDetergentLevel(1)" id="sim-btn-low" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-teal-500 text-white transition-all">Normal</button>
+                            <button onclick="setDetergentLevel(2)" id="sim-btn-med" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition-all">Sedang</button>
+                            <button onclick="setDetergentLevel(3)" id="sim-btn-high" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition-all">Tinggi (Bahaya)</button>
+                        </div>
+                    </div>
+
+                    <!-- Water Body Canvas Simulation Visual -->
+                    <div class="relative w-full h-56 rounded-xl overflow-hidden border border-slate-700 bg-gradient-to-b from-sky-400 to-blue-700 transition-all duration-500" id="water-tank">
+                        <!-- Sun light reflection -->
+                        <div class="absolute top-0 left-0 right-0 h-6 bg-white/20 backdrop-blur-sm transition-all duration-500" id="foam-layer"></div>
+                        
+                        <!-- Algae Layer -->
+                        <div class="absolute top-4 left-0 right-0 bg-emerald-500/80 transition-all duration-700" id="algae-layer" style="height: 0%;"></div>
+
+                        <!-- Organisms inside water -->
+                        <div class="absolute inset-0 p-4 flex flex-col justify-between pointer-events-none">
+                            <div class="flex justify-between items-center text-xs text-white/80">
+                                <span>Penetrasi Cahaya: <strong id="light-val">100%</strong></span>
+                                <span>Kadar Oksigen (DO): <strong id="do-val" class="text-emerald-300">8.5 mg/L</strong></span>
+                            </div>
+
+                            <!-- Fish Visual Status -->
+                            <div class="flex justify-around items-center my-auto transition-all duration-500" id="fish-container">
+                                <div class="text-2xl transition-transform duration-300" id="fish-1">🐟</div>
+                                <div class="text-2xl transition-transform duration-300" id="fish-2">🐠</div>
+                                <div class="text-2xl transition-transform duration-300" id="fish-3">🐡</div>
+                            </div>
+
+                            <div class="text-xs text-white/70 text-center font-mono" id="status-text">
+                                Status Ekosistem: Seimbang & Sehat
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step-by-Step Reaction Process -->
+                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+                        <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-700">
+                            <p class="font-bold text-teal-300 mb-1">1. Limbah STPP</p>
+                            <p class="text-slate-400">Fosfat berlebih masuk ke sungai/perairan.</p>
+                        </div>
+                        <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-700">
+                            <p class="font-bold text-emerald-300 mb-1">2. Algal Bloom</p>
+                            <p class="text-slate-400">Pertumbuhan eceng gondok & alga tak terkendali.</p>
+                        </div>
+                        <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-700">
+                            <p class="font-bold text-amber-300 mb-1">3. Pembusukan Aerob</p>
+                            <p class="text-slate-400">Bakteri mengurai alga mati & menyerap Oksigen.</p>
+                        </div>
+                        <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-700">
+                            <p class="font-bold text-rose-300 mb-1">4. Anoksia / Hypoxia</p>
+                            <p class="text-slate-400">Oksigen habis (DO ~ 0 mg/L), kematian massal biota.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: EKOLOGI & LINGKUNGAN -->
+            <section id="tab-ekologi" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-blue-100 text-blue-800 mb-3">
+                        Perspektif 2: Siklus Ekologi
+                    </span>
+                    <h2 class="text-2xl font-bold text-slate-900">Perjalanan Limbah: Dari Parit Rumah Tangga ke Laut Lepas</h2>
+                    <p class="text-slate-600 mt-2 text-sm leading-relaxed">
+                        Pencemaran detergen tidak berhenti di saluran pembuangan, melainkan merambat melalui siklus hidrologi hingga merusak terumbu karang laut lepas.
+                    </p>
+                </div>
+
+                <!-- Interactive Hydrology Pathway Diagram -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-6">
+                    <h3 class="font-bold text-slate-900 text-lg flex items-center gap-2">
+                        <i data-lucide="git-commit" class="w-5 h-5 text-blue-600"></i>
+                        Alur Jalur Pencemaran Air (Klik Tiap Tahap)
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-5 gap-3 relative">
+                        <button onclick="showPathway(1)" id="path-btn-1" class="path-btn p-4 rounded-xl border-2 border-blue-500 bg-blue-50 text-left transition-all">
+                            <span class="text-xs font-bold text-blue-600 block mb-1">TAHAP 1</span>
+                            <span class="font-bold text-slate-900 text-sm block">Sumber Greywater</span>
+                            <span class="text-xs text-slate-500 mt-1 block">Laundry & Rumah Tangga</span>
+                        </button>
+                        <button onclick="showPathway(2)" id="path-btn-2" class="path-btn p-4 rounded-xl border border-slate-200 hover:border-blue-300 bg-slate-50 text-left transition-all">
+                            <span class="text-xs font-bold text-slate-400 block mb-1">TAHAP 2</span>
+                            <span class="font-bold text-slate-900 text-sm block">Drainase / Parit</span>
+                            <span class="text-xs text-slate-500 mt-1 block">Infiltrasi & Runoff</span>
+                        </button>
+                        <button onclick="showPathway(3)" id="path-btn-3" class="path-btn p-4 rounded-xl border border-slate-200 hover:border-blue-300 bg-slate-50 text-left transition-all">
+                            <span class="text-xs font-bold text-slate-400 block mb-1">TAHAP 3</span>
+                            <span class="font-bold text-slate-900 text-sm block">Tukad (Sungai)</span>
+                            <span class="text-xs text-slate-500 mt-1 block">Kerusakan Biota Bentik</span>
+                        </button>
+                        <button onclick="showPathway(4)" id="path-btn-4" class="path-btn p-4 rounded-xl border border-slate-200 hover:border-blue-300 bg-slate-50 text-left transition-all">
+                            <span class="text-xs font-bold text-slate-400 block mb-1">TAHAP 4</span>
+                            <span class="font-bold text-slate-900 text-sm block">Estuari & Muara</span>
+                            <span class="text-xs text-slate-500 mt-1 block">Kerusakan Mangrove</span>
+                        </button>
+                        <button onclick="showPathway(5)" id="path-btn-5" class="path-btn p-4 rounded-xl border border-slate-200 hover:border-blue-300 bg-slate-50 text-left transition-all">
+                            <span class="text-xs font-bold text-slate-400 block mb-1">TAHAP 5</span>
+                            <span class="font-bold text-slate-900 text-sm block">Terumbu Karang</span>
+                            <span class="text-xs text-slate-500 mt-1 block">Pemutihan Karang</span>
+                        </button>
+                    </div>
+
+                    <!-- Detailed Explanation Box -->
+                    <div id="pathway-detail-box" class="bg-slate-50 p-5 rounded-xl border border-slate-200 text-sm">
+                        <!-- JS Dynamic Inserted Content -->
+                    </div>
+                </div>
+
+                <!-- Bioakumulasi & Biomagnifikasi Card -->
+                <div class="bg-gradient-to-br from-slate-900 to-indigo-950 text-white p-6 rounded-2xl shadow-lg">
+                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                        <i data-lucide="shield-alert" class="w-5 h-5 text-amber-400"></i>
+                        Bioakumulasi & Biomagnifikasi pada Rantai Makanan
+                    </h3>
+                    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                        Racun detergen yang terserap mikro-organisme meningkat konsentrasinya di setiap tingkatan trofik hingga mencapai piring makanan manusia.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                            <div class="text-xs text-teal-400 font-bold mb-1">Tingkat Trofik 1</div>
+                            <h4 class="font-bold text-white mb-2">Biota Bentik & Plankton</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                Cacing air & zooplankton menyerap surfaktan dan logam berat terpapar detergen di sedimen sungai.
+                            </p>
+                        </div>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                            <div class="text-xs text-amber-400 font-bold mb-1">Tingkat Trofik 2</div>
+                            <h4 class="font-bold text-white mb-2">Ikan Kecil & Predator</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                Ikan mengonsumsi ribuan zooplankton tercemar. Akibatnya toksin terakumulasi dalam jaringan lemak ikan.
+                            </p>
+                        </div>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                            <div class="text-xs text-rose-400 font-bold mb-1">Tingkat Trofik Puncak</div>
+                            <h4 class="font-bold text-white mb-2">Manusia & Burung Laut</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                Konsentrasi bahan kimia berbahaya mencapai tingkat tertinggi saat manusia mengonsumsi hasil laut lokal.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: PARIWISATA & EKONOMI -->
+            <section id="tab-pariwisata" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-amber-100 text-amber-800 mb-3">
+                        Perspektif 3: Ekonomi & Destinasi
+                    </span>
+                    <h2 class="text-2xl font-bold text-slate-900">Ancaman terhadap Branding Nature Tourism Bali</h2>
+                    <p class="text-slate-600 mt-2 text-sm leading-relaxed">
+                        Model pariwisata Bali bergantung pada kelestarian alam. Pencemaran limbah cair detergen secara langsung mengikis nilai jual destinasi kelas dunia.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Impact Cards -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center">
+                            <i data-lucide="eye-off" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-lg">Penurunan Quality Tourism Index</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Busa putih berbau menyengat di aliran sungai ikonik seperti <strong>Tukad Badung</strong> dan <strong>Tukad Mati</strong> merusak estetika visual lanskap Bali yang terkenal indah di mata wisatawan mancanegara.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center">
+                            <i data-lucide="anchor" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-lg">Kerusakan Wisata Bahari & Diving</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Bahan kimia memicu pemutihan karang (<em>Coral Bleaching</em>) di kawasan Nusa Penida, Sanur, dan Amed. Hal ini menghancurkan daya tarik utama industri diving dan snorkeling.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
+                            <i data-lucide="activity" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-lg">Isu Kesehatan & Irritasi Wisatawan</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Tinggi nya konsentrasi surfaktan di air pesisir berisiko menimbulkan penyakit dermatitis dan iritasi mata bagi wisatawan yang berenang di pantai.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-lg">Standar ASEAN Green Hotel</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Hotel yang tidak mengolah <em>Greywater</em> atau menggunakan detergen non-biodegradable terancam kehilangan sertifikasi ramah lingkungan GSTC & ASEAN Green Hotel Standard.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: ADAT & BUDAYA BALI -->
+            <section id="tab-budaya" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-purple-100 text-purple-800 mb-3">
+                        Perspektif 4: Kosmologi & Kearifan Lokal
+                    </span>
+                    <h2 class="text-2xl font-bold text-slate-900">Degradasi Kesucian Air dalam Ajaran Hindu Bali</h2>
+                    <p class="text-slate-600 mt-2 text-sm leading-relaxed">
+                        Dalam kosmologi Hindu Bali, air (Wari/Yeh) adalah sarana sakral penyucian raga dan jiwa. Pencemaran detergen merusak tatanan spiritual ini.
+                    </p>
+                </div>
+
+                <!-- Tri Hita Karana Diagram -->
+                <div class="bg-gradient-to-br from-amber-900 via-slate-900 to-purple-950 text-white p-6 rounded-2xl shadow-xl">
+                    <h3 class="text-xl font-bold text-center text-amber-300 mb-6">Kerangka Filosofis Tri Hita Karana & Air</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white/10 backdrop-blur-md p-5 rounded-xl border border-white/10 space-y-3">
+                            <div class="text-xs font-bold text-amber-400 uppercase tracking-wider">Parahyangan</div>
+                            <h4 class="font-bold text-lg text-white">Hubungan dengan Tuhan</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Pencemaran air mengganggu ritual <strong>Penglukatan</strong> dan keberlangsungan air murni untuk sarana puji astawa (Tirta Suci).
+                            </p>
+                        </div>
+
+                        <div class="bg-white/10 backdrop-blur-md p-5 rounded-xl border border-white/10 space-y-3">
+                            <div class="text-xs font-bold text-amber-400 uppercase tracking-wider">Pawongan</div>
+                            <h4 class="font-bold text-lg text-white">Hubungan Sesama Manusia</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Pencemaran sumber air minum & sungai memicu krisis air bersih serta potensi konflik sosial antar warga/komunitas.
+                            </p>
+                        </div>
+
+                        <div class="bg-white/10 backdrop-blur-md p-5 rounded-xl border border-white/10 space-y-3 border-emerald-500/50 bg-emerald-950/20">
+                            <div class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Palemahan (Fokus Utama)</div>
+                            <h4 class="font-bold text-lg text-white">Hubungan dengan Alam</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Kewajiban etis menjaga kebersihan ekosistem. Membuang detergen berbusa melanggar prinsip keharmonisan lingkungan.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sad Kertih & Ritual Explanation -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start space-x-4">
+                        <div class="bg-blue-100 p-3 rounded-xl text-blue-700 shrink-0">
+                            <i data-lucide="droplet" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-1">Danu Kertih & Segara Kertih</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Nilai ajaran adat yang mewajibkan memelihara kesucian dan kelestarian sumber air danau, sungai (Danu Kertih), serta muara dan laut (Segara Kertih).
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start space-x-4">
+                        <div class="bg-purple-100 p-3 rounded-xl text-purple-700 shrink-0">
+                            <i data-lucide="sparkles" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-1">Tradisi Melasti & Penglukatan</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Ritual Mensucikan pratima (Melasti) & Pembersihan Diri (Penglukatan) butuh air yang <strong>Suci & Nirmala</strong>. Air berbusa detergen merusak nilai estetika keagamaan.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: RENCANA AKSI SOLUSI -->
+            <section id="tab-aksi" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-100 text-emerald-800 mb-3">
+                        Perspektif 5: Solusi & Pemulihan
+                    </span>
+                    <h2 class="text-2xl font-bold text-slate-900">Rencana Aksi Pemulihan Komprehensif</h2>
+                    <p class="text-slate-600 mt-2 text-sm leading-relaxed">
+                        Langkah nyata dan terpadu dari aspek teknis, substitusi bahan ramah lingkungan, hukum adat, hingga edukasi krama Bali.
+                    </p>
+                </div>
+
+                <!-- Interactive Action Plan Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Teknis -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:border-teal-300 transition-all">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="bg-teal-100 text-teal-700 p-2.5 rounded-xl">
+                                <i data-lucide="cpu" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-teal-600 uppercase">Skala Teknis Usaha</span>
+                                <h4 class="font-bold text-slate-900">Pengolahan Limbah (IPAL)</h4>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Pembangunan sistem <strong>IPAL Aerob-Anaerob 4 Tahap</strong> wajib di setiap usaha laundry, villa, dan hotel untuk menyaring zat kimia sebelum dilepas ke drainase umum.
+                        </p>
+                    </div>
+
+                    <!-- Material Eco-Substitusi -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:border-emerald-300 transition-all">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="bg-emerald-100 text-emerald-700 p-2.5 rounded-xl">
+                                <i data-lucide="leaf" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-emerald-600 uppercase">Skala Material</span>
+                                <h4 class="font-bold text-slate-900">Eko-Substitusi (Buah Lerak & APG)</h4>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Mengganti detergen LAS/ABS keras dengan pembersih berbasis saponin alami (<strong>ekstrak buah lerak / soapnut</strong>) atau <em>Alkyl Polyglucosides (APG)</em> berbasis minyak kelapa.
+                        </p>
+                    </div>
+
+                    <!-- Hukum Adat -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:border-purple-300 transition-all">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="bg-purple-100 text-purple-700 p-2.5 rounded-xl">
+                                <i data-lucide="gavel" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-purple-600 uppercase">Hukum Adat</span>
+                                <h4 class="font-bold text-slate-900">Penegakan Pararem Desa Adat</h4>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Pengesahan aturan adat (<em>Pararem</em>) mengenai larangan membuang limbah cair tanpa diolah beserta penetapan sanksi <strong>Pamidanda</strong> (Denda Adat & Upacara).
+                        </p>
+                    </div>
+
+                    <!-- Edukasi -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:border-amber-300 transition-all">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="bg-amber-100 text-amber-700 p-2.5 rounded-xl">
+                                <i data-lucide="users" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-amber-600 uppercase">Edukasi Krama</span>
+                                <h4 class="font-bold text-slate-900">Pemisahan Air Limbah Rumah Tangga</h4>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Sosialisasi dan gerakan pemisahan antara <em>Blackwater</em> (air limbah kakus) dan <em>Greywater</em> (air limbah cucian) di tingkat rumah tangga.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 6: KUIS INTERAKTIF -->
+            <section id="tab-kuis" class="tab-content hidden space-y-6">
+                <div class="bg-gradient-to-r from-amber-500 to-orange-600 text-white p-6 rounded-2xl shadow-md">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-white/20 text-white mb-2">
+                        Evaluasi Siswa
+                    </span>
+                    <h2 class="text-2xl font-bold">Uji Pemahaman & Kuis Interaktif</h2>
+                    <p class="text-white/90 mt-1 text-sm">
+                        Jawab pertanyaan di bawah ini untuk menguji sejauh mana kamu memahami dampak detergen pada ekosistem dan budaya Bali!
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-6" id="quiz-container">
+                    <div class="flex justify-between items-center pb-4 border-b border-slate-100">
+                        <span class="text-xs font-bold text-slate-400" id="quiz-progress">Pertanyaan 1 dari 4</span>
+                        <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg" id="quiz-score">Skor: 0</span>
+                    </div>
+
+                    <div id="quiz-content" class="space-y-4">
+                        <!-- JS Inserted Quiz Question -->
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-6 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+            <p>© 2026 EcoBali EduInteractive - Media Pembelajaran Berbasis Sains, Ekologi & Kebudayaan Bali</p>
+            <p class="text-slate-500">Dirancang untuk Pembelajaran Interaktif Siswa & Mahasiswa</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Data Pathway Details
+        const pathwayData = {
+            1: {
+                title: "1. Rumah Tangga & Usaha Laundry",
+                desc: "Air bekas cucian (Greywater) mengandung surfaktan sintetis tinggi dan fosfat dari penguat (STPP) dibuang langsung tanpa proses penyaringan awal."
+            },
+            2: {
+                title: "2. Saluran Drainase / Parit",
+                desc: "Air limbah meresap ke dalam tanah (infiltrasi) mencemari akuifer air tanah (sumur warga) dan mengalir (runoff) menuju jaringan sungai."
+            },
+            3: {
+                title: "3. Tukad (Sungai) & Biota Bentik",
+                desc: "Limbah merusak organisme bentik (cacing air, larva). Busa menghambat sinar matahari dan memicu hilangnya oksigen terlarut (DO Drop)."
+            },
+            4: {
+                title: "4. Estuari & Ekosistem Mangrove",
+                desc: "Akumulasi bahan kimia merusak struktur perakaran mangrove dan mematikan benih-benih ikan yang berlindung di kawasan muara."
+            },
+            5: {
+                title: "5. Pesisir & Terumbu Karang",
+                desc: "Surfaktan memicu stres biokimia pada Karang, menyebabkan pemutihan karang (Coral Bleaching), dan menghancurkan daya tarik wisata bahari."
+            }
+        };
+
+        // Quiz Data
+        const quizData = [
+            {
+                q: "Apa peran utama bahan penguat (Builder STPP) dalam detergen dan dampaknya pada air?",
+                options: [
+                    "Memberikan aroma wangi dan membunuh bakteri air",
+                    "Mengikat ion Ca2+ & Mg2+, namun memicu Eutrofikasi akibat fosfor berlebih",
+                    "Menurunkan busa agar air sungai menjadi jernih kembali",
+                    "Melindungi insang ikan dari paparan bahan kimia"
+                ],
+                ans: 1,
+                explain: "STPP berfungsi melembutkan air sadah, tetapi kandungan Fosfornya memicu ledakan pertumbuhan alga (Eutrofikasi)."
+            },
+            {
+                q: "Mengapa surfaktan ABS lebih berbahaya bagi lingkungan dibandingkan LAS?",
+                options: [
+                    "Karena ABS berwarna lebih gelap",
+                    "Karena ABS berbau lebih menyengat",
+                    "Karena ABS memiliki rantai karbon bercabang yang sangat sulit diurai mikroorganisme (non-biodegradable)",
+                    "Karena ABS terbuat dari bahan buah lerak alami"
+                ],
+                ans: 2,
+                explain: "Struktur rantai bercabang pada ABS membuatnya tahan terhadap biodegradasi alami oleh mikroba pengurai."
+            },
+            {
+                q: "Konsep filosofi Bali yang mengajarkan hubungan harmonis antara manusia dengan lingkungan fisik/alam adalah...",
+                options: [
+                    "Parahyangan",
+                    "Pawongan",
+                    "Palemahan",
+                    "Tri Kaya Parisudha"
+                ],
+                ans: 2,
+                explain: "Palemahan adalah bagian dari Tri Hita Karana yang mengatur keselarasan manusia dengan alam lingkungan sekitarnya."
+            },
+            {
+                q: "Apa nama bahan pengganti detergen berbasis bahan alami saponin yang ramah lingkungan?",
+                options: [
+                    "Ekstrak Buah Lerak (Soapnut)",
+                    "Sodium Tripolyphosphate",
+                    "Alkylbenzene Sulfonate",
+                    "Phthalates"
+                ],
+                ans: 0,
+                explain: "Buah lerak menghasilkan saponin alami yang mudah terurai dan tidak beracun bagi biota perairan."
+            }
+        ];
+
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+
+        // Switch Tab Function
+        function switchTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            
+            // Show selected tab content
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            // Update Nav Buttons Style
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = "nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all duration-200";
+            });
+
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            if (activeBtn) {
+                activeBtn.className = "nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition-all duration-200 bg-teal-50 text-teal-700 border border-teal-200 shadow-sm";
+            }
+
+            if (tabId === 'kuis') {
+                loadQuizQuestion();
+            }
+        }
+
+        // Lab Simulator Function
+        function setDetergentLevel(level) {
+            const foam = document.getElementById('foam-layer');
+            const algae = document.getElementById('algae-layer');
+            const tank = document.getElementById('water-tank');
+            const lightVal = document.getElementById('light-val');
+            const doVal = document.getElementById('do-val');
+            const statusText = document.getElementById('status-text');
+
+            const fish1 = document.getElementById('fish-1');
+            const fish2 = document.getElementById('fish-2');
+            const fish3 = document.getElementById('fish-3');
+
+            // Reset button active styles
+            document.getElementById('sim-btn-low').className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition-all";
+            document.getElementById('sim-btn-med').className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition-all";
+            document.getElementById('sim-btn-high').className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition-all";
+
+            if (level === 1) {
+                document.getElementById('sim-btn-low').className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-teal-500 text-white transition-all";
+                foam.style.height = "10px";
+                algae.style.height = "0%";
+                tank.className = "relative w-full h-56 rounded-xl overflow-hidden border border-slate-700 bg-gradient-to-b from-sky-400 to-blue-700 transition-all duration-500";
+                lightVal.innerText = "100%";
+                doVal.innerText = "8.5 mg/L";
+                doVal.className = "text-emerald-300";
+                statusText.innerText = "Status Ekosistem: Seimbang & Sehat";
+
+                fish1.style.transform = "rotate(0deg) translateY(0px)";
+                fish2.style.transform = "rotate(0deg) translateY(0px)";
+                fish3.style.transform = "rotate(0deg) translateY(0px)";
+            } else if (level === 2) {
+                document.getElementById('sim-btn-med').className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-500 text-white transition-all";
+                foam.style.height = "25px";
+                algae.style.height = "35%";
+                tank.className = "relative w-full h-56 rounded-xl overflow-hidden border border-slate-700 bg-gradient-to-b from-emerald-600 to-blue-900 transition-all duration-500";
+                lightVal.innerText = "45%";
+                doVal.innerText = "3.2 mg/L";
+                doVal.className = "text-amber-300";
+                statusText.innerText = "Status Ekosistem: Algal Bloom Terjadi & Biota Stres";
+
+                fish1.style.transform = "rotate(15deg) translateY(5px)";
+                fish2.style.transform = "rotate(-20deg) translateY(8px)";
+                fish3.style.transform = "rotate(10deg) translateY(4px)";
+            } else if (level === 3) {
+                document.getElementById('sim-btn-high').className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-500 text-white transition-all";
+                foam.style.height = "50px";
+                algae.style.height = "75%";
+                tank.className = "relative w-full h-56 rounded-xl overflow-hidden border border-slate-700 bg-gradient-to-b from-emerald-950 via-slate-900 to-black transition-all duration-500";
+                lightVal.innerText = "5%";
+                doVal.innerText = "0.2 mg/L (Anoksia)";
+                doVal.className = "text-rose-400 font-bold";
+                statusText.innerText = "Status Ekosistem: Kematian Massal Ikan (Hypoxia Total)";
+
+                fish1.style.transform = "rotate(180deg) translateY(-20px)";
+                fish2.style.transform = "rotate(180deg) translateY(-15px)";
+                fish3.style.transform = "rotate(180deg) translateY(-25px)";
+            }
+        }
+
+        // Hydrology Pathway Display
+        function showPathway(step) {
+            // Update button styles
+            for (let i = 1; i <= 5; i++) {
+                const btn = document.getElementById(`path-btn-${i}`);
+                if (i === step) {
+                    btn.className = "path-btn p-4 rounded-xl border-2 border-blue-500 bg-blue-50 text-left transition-all shadow-sm";
+                    btn.querySelector('span').className = "text-xs font-bold text-blue-600 block mb-1";
+                } else {
+                    btn.className = "path-btn p-4 rounded-xl border border-slate-200 hover:border-blue-300 bg-slate-50 text-left transition-all";
+                    btn.querySelector('span').className = "text-xs font-bold text-slate-400 block mb-1";
+                }
+            }
+
+            // Update content box
+            const data = pathwayData[step];
+            const detailBox = document.getElementById('pathway-detail-box');
+            detailBox.innerHTML = `
+                <div class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-base">${data.title}</h4>
+                    <p class="text-slate-600 leading-relaxed">${data.desc}</p>
+                </div>
+            `;
+        }
+
+        // Quiz Interactive Logic
+        function loadQuizQuestion() {
+            const container = document.getElementById('quiz-content');
+            const progress = document.getElementById('quiz-progress');
+            const scoreDisplay = document.getElementById('quiz-score');
+
+            progress.innerText = `Pertanyaan ${currentQuizIndex + 1} dari ${quizData.length}`;
+            scoreDisplay.innerText = `Skor: ${quizScore}`;
+
+            if (currentQuizIndex >= quizData.length) {
+                // Quiz Finish State
+                container.innerHTML = `
+                    <div class="text-center py-8 space-y-4">
+                        <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                            🎉
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900">Kuis Selesai!</h3>
+                        <p class="text-sm text-slate-600">Kamu berhasil menyelesaikan evaluasi dengan skor total:</p>
+                        <div class="text-4xl font-extrabold text-emerald-600">${quizScore} / ${quizData.length * 25}</div>
+                        <button onclick="resetQuiz()" class="mt-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition-all">
+                            Ulangi Kuis
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            const current = quizData[currentQuizIndex];
+
+            let optionsHTML = '';
+            current.options.forEach((opt, idx) => {
+                optionsHTML += `
+                    <button onclick="checkAnswer(${idx})" class="w-full text-left p-4 rounded-xl border border-slate-200 hover:border-teal-500 hover:bg-teal-50/50 transition-all text-sm font-medium text-slate-800 flex items-center justify-between group">
+                        <span>${opt}</span>
+                        <i data-lucide="circle" class="w-4 h-4 text-slate-300 group-hover:text-teal-500"></i>
+                    </button>
+                `;
+            });
+
+            container.innerHTML = `
+                <div class="space-y-4">
+                    <h3 class="font-bold text-slate-900 text-lg leading-snug">${current.q}</h3>
+                    <div class="space-y-2">
+                        ${optionsHTML}
+                    </div>
+                    <div id="quiz-feedback" class="hidden p-4 rounded-xl text-xs font-semibold"></div>
+                </div>
+            `;
+
+            lucide.createIcons();
+        }
+
+        function checkAnswer(selectedIdx) {
+            const current = quizData[currentQuizIndex];
+            const feedback = document.getElementById('quiz-feedback');
+
+            if (selectedIdx === current.ans) {
+                quizScore += 25;
+                feedback.className = "p-4 rounded-xl text-xs font-medium bg-emerald-100 text-emerald-900 border border-emerald-200 block";
+                feedback.innerHTML = `<strong>Benar! ✨</strong> ${current.explain}`;
+            } else {
+                feedback.className = "p-4 rounded-xl text-xs font-medium bg-rose-100 text-rose-900 border border-rose-200 block";
+                feedback.innerHTML = `<strong>Kurang Tepat.</strong> ${current.explain}`;
+            }
+
+            // Disable all option buttons to prevent re-click
+            document.querySelectorAll('#quiz-content button').forEach(btn => btn.disabled = true);
+
+            // Show Next Button
+            setTimeout(() => {
+                currentQuizIndex++;
+                loadQuizQuestion();
+            }, 2500);
+        }
+
+        function resetQuiz() {
+            currentQuizIndex = 0;
+            quizScore = 0;
+            loadQuizQuestion();
+        }
+
+        // Initialize First View
+        window.onload = function() {
+            showPathway(1);
+        };
+    </script>
+</body>
+</html>
